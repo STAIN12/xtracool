@@ -104,15 +104,6 @@ class AuthMethods {
   Future<void> signOut(context) async {
     try {
       await firebaseAuth.signOut();
-      // Navigator.pushAndRemoveUntil(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: ((context) => const LoginScreen()),
-      //   ),
-      // );
-
-      // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: context => LoginScreen()), (route) => false);
-
       Navigator.pushAndRemoveUntil<void>(
         context,
         MaterialPageRoute<void>(

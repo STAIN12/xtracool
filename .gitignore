@@ -2,12 +2,14 @@
 *.class
 *.log
 *.pyc
+*.env
 *.swp
 .DS_Store
 .atom/
 .buildlog/
 .history
 .svn/
+.env
 migrate_working_dir/
 
 # IntelliJ related
