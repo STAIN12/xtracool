@@ -12,7 +12,6 @@ import '../resource/audio_player_controller.dart';
 class PlayerScreen extends StatefulWidget {
   const PlayerScreen({Key? key}) : super(key: key);
 
-
   @override
   State<PlayerScreen> createState() => _PlayerScreenState();
 }
@@ -24,15 +23,13 @@ class _PlayerScreenState extends State<PlayerScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: kWhiteColor,
+        // elevation: 0.0,
         leading: IconButton(
             splashRadius: 0.2,
             icon: const RotatedBox(
               quarterTurns: 3,
               child: Icon(
                 Icons.arrow_back_ios,
-                color: kPrimaryColor,
                 size: 18,
               ),
             ),
@@ -42,11 +39,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
             splashRadius: 0.2,
             icon: const Icon(
               Icons.more_vert,
-              color: kPrimaryColor,
               size: 18,
             ),
             onPressed: () {
-              //Todo: Share button
             },
           ),
         ],
@@ -77,123 +72,36 @@ class _PlayerScreenState extends State<PlayerScreen> {
                   child: Column(
                     children: [
                       Text(
-                        audioProvider.currentAudioDetail["title"],
-                        overflow: TextOverflow.fade,
+                        "audioProvider.currentAudioDetail audioProvider.currentAudioDetail ",
+                        overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: kTextStyleSize9.copyWith(
+                        style: kTextStyleSize15.copyWith(
                             fontWeight: FontWeight.w900),
+                      ),
+                      kSizedBoxHeight10,
+                      Text(
+                        "audioProvider.currentAudioDetail audioProvider.currentAudioDetail",
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: kTextStyleSize10,
                       ),
                     ],
                   ),
-                ),
-
-                //////////////////
-                // Share, Download , Like
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                      splashRadius: 0.1,
-                      onPressed: () {
-                        //Todo: Share button to share the audio
-                        audioProvider.isLoadingAudioFile;
-                      },
-                      icon: const Icon(
-                        Icons.share,
-                        size: kIconSize20,
-                        color: kPrimaryColor,
-                      ),
-                    ),
-                    IconButton(
-                      splashRadius: 0.1,
-                      onPressed: () => downloadFile(
-                          url: audioProvider.currentAudioDetail["audio_path"],
-                          fileName: audioProvider.currentAudioDetail["title"]),
-                      icon: const Icon(Icons.download_outlined,
-                          size: kIconSize20, color: kPrimaryColor),
-                    ),
-                    IconButton(
-                      splashRadius: 0.1,
-                      onPressed: () {
-                        //Todo: like an audio button and save action to LikeScreen
-                      },
-                      icon: const Icon(
-                        Icons.favorite_outline,
-                        size: kIconSize20,
-                        color: kPrimaryColor,
-                      ),
-                    ),
-                  ],
                 ),
 
                 ////////////////////
                 // Audio Controllers
                 audioProvider.isLoadingAudioFile
                     ? const CircularProgressIndicator(
-                        strokeWidth: 20.0,
+                        strokeWidth: 10.0,
                         color: kPrimaryColor,
                       )
                     : const AudioPlayerController()
               ],
             ),
-
-            ///////////////////
-            ////// Ads Banner
-            ///////////////////////////////
-            // Positioned(
-            //   right: 0,
-            //   left: 0,
-            //   child: Container(
-            //     color: Colors.green,
-            //     height: 200,
-            //     width: 100,
-            //   ),
-            // ),
-
-            // Positioned(
-            //   right: 0,
-            //   left: 0,
-            //   child: Container(
-            //     color: Colors.green,
-            //     height: 80,
-            //     width: 100,
-            //   ),
-            // ),
           ],
         ),
       ),
     );
-  }
-
-  // Future openFile({required String url, required String fileName}) async {
-  //   await downloadFile(url, fileName);
-  // }
-
-  Future<File?> downloadFile({required String url, required String fileName}) async {
-    final appStorage = await getApplicationDocumentsDirectory();
-
-    final file = File("${appStorage.absolute.path}/$fileName");
-    print("Location  ::::::::::: ${appStorage.path}/$fileName");
-
-    // try {
-    //   final response = await Dio().get(
-    //     url,
-    //     options: Options(
-    //       responseType: ResponseType.bytes,
-    //       followRedirects: false,
-    //       receiveTimeout: const Duration(seconds: 3),
-    //     ),
-    //   );
-    //
-    //   final raf = file.openSync(mode: FileMode.write);
-    //   raf.writeFromSync(response.data);
-    //
-    //   await raf.close();
-    //
-    //   return file;
-    // } catch (e) {
-    //   print("Errorrr $e");
-    //   return null;
-    // }
   }
 }

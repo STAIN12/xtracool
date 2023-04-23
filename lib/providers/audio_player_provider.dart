@@ -56,13 +56,13 @@ class AudioPlayerProvider extends ChangeNotifier {
       icon: btnIsPlaying
           ? Icon(
               btnStartPauseIcon[1],
-              size: kIconSize25,
-              color: kPrimaryColor,
+              size: kIconSize35,
+              color: kYellowPrimaryColor,
             )
           : Icon(
               btnStartPauseIcon[0],
-              size: kIconSize25,
-              color: kPrimaryColor,
+              size: kIconSize35,
+              color: kYellowPrimaryColor,
             ),
       onPressed: () async {
         /////////////////////
@@ -76,9 +76,7 @@ class AudioPlayerProvider extends ChangeNotifier {
         /////////////////////
         ////// Play or pause audio
         btnIsPlaying
-            ? await audioPlayer.play(
-                AssetSource(audioPath),
-              )
+            ? await audioPlayer.play(UrlSource(audioPath))
             : audioPlayer.pause();
 
         notifyListeners();
@@ -91,8 +89,8 @@ class AudioPlayerProvider extends ChangeNotifier {
       max: _duration.inSeconds.toDouble(),
       value: _position.inSeconds.toDouble(),
       min: minAudioPlayPositioned,
-      activeColor: kPrimaryColor,
-      inactiveColor: kGreyColor,
+      activeColor: kYellowPrimaryColor,
+      inactiveColor: kPrimaryColor,
       onChanged: (double value) {
         changeToSecond(value.toInt());
         value = value;
@@ -151,10 +149,9 @@ class AudioPlayerProvider extends ChangeNotifier {
 
       waitForAudiFile();
     } catch (err) {
-      print("Errors Errors Errors");
-      print(err);
-
-      waitForAudiFile();
+      print("There is an error at initStateAction");
+      rethrow;
+      // waitForAudiFile();
     }
 
     notifyListeners();

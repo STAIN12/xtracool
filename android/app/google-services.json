@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "777330050919",
+    "project_id": "xtracool-2",
+    "storage_bucket": "xtracool-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777330050919:android:b795a6fed9f07acf3c11c2",
+        "android_client_info": {
+          "package_name": "app.web.xtracool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "777330050919-80afkmgsfto7n4hchtbdo7g67pf0lisl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.web.xtracool",
+            "certificate_hash": "d3a7f99b31adbe472cbcbc54efdb22ae2e7c46f3"
+          }
+        },
+        {
+          "client_id": "777330050919-ltt6btkt5mmp9ch7ton80r5jl72td38o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1rCwXmVtb5YpDUyV30-Ucf8ju3n3R2Ss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "777330050919-ltt6btkt5mmp9ch7ton80r5jl72td38o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -25,14 +25,12 @@ class _SmallPlayerScreenState extends State<SmallPlayerScreen> {
     return GestureDetector(
       onTap: () => Navigator.of(context).push(
         CustomPageRoute(
-            child: const PlayerScreen(
-            ),
-            direction: AxisDirection.up),
+            child: const PlayerScreen(), direction: AxisDirection.up),
       ),
       child: Container(
         width: double.infinity,
         height: 70,
-        color: kSecondaryColor,
+        color: kPrimaryColor,
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

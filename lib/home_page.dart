@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socool/providers/audio_player_provider.dart';
 import 'package:socool/providers/network_provider.dart';
+import 'package:socool/providers/state_provider.dart';
 import 'package:socool/screens/feed_screen.dart';
 import 'package:socool/screens/no_internet_screen.dart';
 import 'package:socool/screens/profile_screen.dart';
@@ -35,54 +36,65 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    addData();
+    super.initState();
+  }
+
+  addData() {
+    StateProvider userProvider = Provider.of(context, listen: false);
+
+    return userProvider.refreshUser();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var networkStatus = Provider.of<NetworkStatus>(context);
 
     networkStatus.checkInternetConnection();
 
-    return networkStatus.hasInternet
-        ? Scaffold(
-            body: Column(
-              children: [
-                Expanded(
-                  child: screenList[screenIndex],
-                ),
+    // return networkStatus.hasInternet
+    //     ?
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+            child: screenList[screenIndex],
+          ),
 
-                /////////////////////////
-                ///// Show if any audio is set to play
-                /////////////////////////////////////
-                Provider.of<AudioPlayerProvider>(context).audioFileSet
-                    ? const SmallPlayerScreen()
-                    : const SizedBox.shrink()
-              ],
+          /////////////////////////
+          ///// Show if any audio is set to play
+          /////////////////////////////////////
+          Provider.of<AudioPlayerProvider>(context).audioFileSet
+              ? const SmallPlayerScreen()
+              : const SizedBox.shrink()
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              screenIndex == 0 ? Icons.audiotrack : Icons.audiotrack_outlined,
             ),
-            bottomNavigationBar: BottomNavigationBar(
-              items: [
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    screenIndex == 0
-                        ? Icons.audiotrack
-                        : Icons.audiotrack_outlined,
-                  ),
-                  label: 'Discovery',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    screenIndex == 1 ? Icons.search : Icons.search_outlined,
-                  ),
-                  label: 'Search',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    screenIndex == 2 ? Icons.person : Icons.person_outline,
-                  ),
-                  label: 'Profile',
-                ),
-              ],
-              onTap: changeScreenIndex,
-              currentIndex: screenIndex,
+            label: 'Discovery',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              screenIndex == 1 ? Icons.search : Icons.search_outlined,
             ),
-          )
-        : NoInternetScreen();
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              screenIndex == 2 ? Icons.person : Icons.person_outline,
+            ),
+            label: 'Profile',
+          ),
+        ],
+        onTap: changeScreenIndex,
+        currentIndex: screenIndex,
+      ),
+    );
+    // : NoInternetScreen();
   }
 }

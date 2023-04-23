@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:socool/constants/color.dart';
+import 'package:socool/constants/text_styles.dart';
 
 class CustomTextField extends StatelessWidget {
   CustomTextField({
@@ -13,7 +15,8 @@ class CustomTextField extends StatelessWidget {
     this.searchPrefixIcon,
     required this.enableBorderStyle,
     required this.focusBorderStyle,
-    required this.controller, this.onChangeAction,
+    required this.controller,
+    this.onChangeAction,
   }) : super(key: key);
 
   String? hintString;
@@ -37,10 +40,12 @@ class CustomTextField extends StatelessWidget {
       keyboardType: textInputType,
       onChanged: onChangeAction,
       controller: controller,
+      cursorColor: kYellowPrimaryColor,
       decoration: InputDecoration(
+        labelStyle: kTextStyleSize15.copyWith(color: Colors.grey),
         labelText: labelTextString,
         hintStyle: TextStyle(
-            fontSize: 9,
+            fontSize: 12,
             color: Colors.grey.shade300,
             fontWeight: FontWeight.w300),
         filled: containerFilled,

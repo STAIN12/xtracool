@@ -4,6 +4,7 @@ import 'color.dart';
 
 const kMarginTopBottom = EdgeInsets.only(top: 35, bottom: 20);
 
+const double kIconSize35 = 35;
 const double kIconSize25 = 25;
 const double kIconSize20 = 20;
 const double kIconSize15 = 15;
@@ -51,5 +52,9 @@ const kDivider = Divider(
   color: kGreyColor,
 );
 
+const kSuccessResult = "Success";
+
 const kDefaultPhotoURL =
     "https://firebasestorage.googleapis.com/v0/b/preacher-777.appspot.com/o/default_images%2Fempty_user.png?alt=media&token=7c955e6b-2743-45cb-8c7b-b5ffb98fcd15";
+
+const kFreeAccount = "Free plan";

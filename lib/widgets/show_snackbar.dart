@@ -6,7 +6,7 @@ showSnackBar(String text, Color backgroundColor, BuildContext context) {
       backgroundColor: backgroundColor,
       content: Text(
         text,
-        // style: kTextStyleSize9,
+        style: const TextStyle(color: Colors.white),
       ),
     ),
   );

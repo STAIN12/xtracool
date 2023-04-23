@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:socool/constants/text_styles.dart';
 
 class ArtistCard extends StatelessWidget {
   const ArtistCard({
@@ -8,14 +9,17 @@ class ArtistCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         children: [
           CircleAvatar(
             radius: 50,
             backgroundColor: Colors.red,
           ),
-          Text("Black Sherif")
+          Text(
+            "Black Sherif",
+            style: kTextStyleSize12,
+          )
         ],
       ),
     );

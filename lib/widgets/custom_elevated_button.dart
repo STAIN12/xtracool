@@ -19,20 +19,21 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          minimumSize: const Size.fromHeight(35),
-          backgroundColor: kPrimaryColor),
+        minimumSize: const Size.fromHeight(50),
+        backgroundColor: kYellowPrimaryColor,
+      ),
       onPressed: onPressAction,
       child: isLoading
           ? const SizedBox(
               width: 25,
               height: 25,
               child: CircularProgressIndicator(
-                color: Colors.white,
+                color: Colors.black,
               ),
             )
           : Text(
               labelString,
-              style: kTextStyleSize8.copyWith(fontWeight: FontWeight.w900),
+              style: kTextStyleSize15.copyWith(fontWeight: FontWeight.bold),
             ),
     );
   }
