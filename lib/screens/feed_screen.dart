@@ -23,165 +23,52 @@ class FeedScreen extends StatefulWidget {
 }
 
 class _FeedScreenState extends State<FeedScreen> {
+  AudioAPI audioAPI = AudioAPI();
   @override
   Widget build(BuildContext context) {
-    AudioPlayerProvider audioPlayerProvider =
-        Provider.of(context, listen: false);
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text(
-            "Discovery",
-            style: kTextStyleSize18.copyWith(fontWeight: FontWeight.bold),
-          ),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text(
+          "Discovery",
+          style: kTextStyleSize18.copyWith(fontWeight: FontWeight.bold),
         ),
-        body: audioPlayerProvider.isChartTracksReady == false
-            ? Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20),
-                child: NotificationListener<OverscrollIndicatorNotification>(
-                  onNotification: (overscroll) {
-                    overscroll.disallowIndicator();
-                    return false;
-                  },
-                  child: ListView(
-                    // shrinkWrap: true,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Around you",
-                              style: kTextStyleSize18.copyWith(
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            GestureDetector(
-                              child: Text(
-                                "view more",
-                                style: kTextStyleSize12.copyWith(
-                                  color: kYellowPrimaryColor,
-                                ),
-                              ),
-                              onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: ((context) => AroundYouScreen()),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Column(
-                        children: [
-                          AudioCard(),
-                          AudioCard(),
-                          AudioCard(),
-                          AudioCard(),
-                        ],
-                      ),
-
-                      ////////////////////////////////////////////
-                      ///////// Top Artist
-                      /////////////////////////////////////////
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 30.0, bottom: 10.0, left: 8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Top Artists",
-                                  style: kTextStyleSize18.copyWith(
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                GestureDetector(
-                                  child: Text(
-                                    "view more",
-                                    style: kTextStyleSize12.copyWith(
-                                      color: kYellowPrimaryColor,
-                                    ),
-                                  ),
-                                  onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: ((context) => ArtistScreen()),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                children: [
-                                  ArtistCard(),
-                                  ArtistCard(),
-                                  ArtistCard(),
-                                  ArtistCard(),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-
-                      ////////////////////////////////////////////
-                      ///////// Top Chats
-                      /////////////////////////////////////////
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 30.0, bottom: 10.0, left: 8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Top Charts",
-                                  style: kTextStyleSize18.copyWith(
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                GestureDetector(
-                                  child: Text(
-                                    "view more",
-                                    style: kTextStyleSize12.copyWith(
-                                      color: kYellowPrimaryColor,
-                                    ),
-                                  ),
-                                  onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: ((context) => ChartScreen()),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          // ChartTwoCard(
-                          //   // titleCardOne: 'audioPlayerProvider.ch',
-                          //   // subTitleCardOne: '',
-                          //   // imageCardOne: '',
-                          //   // audioURLCardOne: '',
-                          //   // titleCardTwo: 'audioPlayerProvid',
-                          //   // subTitleCardTwo: '',
-                          //   // imageCardTwo: '',
-                          //   // audioURLCardTwo: '',
-                          // ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              )
-            : const CircularProgressIndicator());
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20),
+        child: NotificationListener<OverscrollIndicatorNotification>(
+          onNotification: (overscroll) {
+            overscroll.disallowIndicator();
+            return false;
+          },
+          child: FutureBuilder(
+              future: audioAPI.getCharts(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text(
+                      snapshot.error.toString(),
+                    ),
+                  );
+                } else if (snapshot.connectionState ==
+                    ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: kYellowPrimaryColor,
+                    ),
+                  );
+                }
+                print("object ${snapshot.data![4]}");
+                return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: ((context, index) {
+                      return AudioCard(
+                        audioDetail: snapshot.data![index],
+                      );
+                    }));
+              }),
+        ),
+      ),
+    );
   }
 }

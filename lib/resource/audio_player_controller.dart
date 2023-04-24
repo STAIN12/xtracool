@@ -18,10 +18,6 @@ class AudioPlayerController extends StatefulWidget {
 }
 
 class _AudioPlayerControllerState extends State<AudioPlayerController> {
-  // final String onlinePath =
-  // "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
-
-  // final String localPath = "downloads/complete.mp3";
 
   //////////////////////////////////
   //// Play & Pause audio button
@@ -76,10 +72,9 @@ class _AudioPlayerControllerState extends State<AudioPlayerController> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        // btnRepeat(),
-        btnMoveToPrevious(),
+        // btnMoveToPrevious(),
         btnPlayStart(),
-        btnMoveToNext(),
+        // btnMoveToNext(),
       ],
     );
   }
@@ -91,12 +86,8 @@ class _AudioPlayerControllerState extends State<AudioPlayerController> {
 
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
-        print(
-            'audioURL ${audioProvider.currentAudioDetail['hub']['actions'][1]['uri']}');
         audioProvider.initStateAction(
             audioProvider.currentAudioDetail['hub']['actions'][1]['uri']);
-
-        // audioProvider.stopAudioPlaying();
       },
     );
 
@@ -124,7 +115,6 @@ class _AudioPlayerControllerState extends State<AudioPlayerController> {
                   children: [
                     Text(
                       position.toString().split(".")[0],
-                      // style: kCountDownTextStyle
                     ),
                     Text(
                       duration.toString().split(".")[0],

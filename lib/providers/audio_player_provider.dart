@@ -20,9 +20,6 @@ class AudioPlayerProvider extends ChangeNotifier {
   Duration _duration = const Duration();
   Duration _position = const Duration();
 
-  // final String onlinePath =
-  //     "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
-
   // ignore: prefer_typing_uninitialized_variables
   var currentAudioDetail;
 
@@ -38,12 +35,10 @@ class AudioPlayerProvider extends ChangeNotifier {
     return _position;
   }
 
-  void waitForAudiFile(bool fileLoaded) {
-    isLoadingAudioFile = fileLoaded;
+  void waitForAudiFile() {
+    isLoadingAudioFile = !isLoadingAudioFile;
     notifyListeners();
   }
-
-  // int screenIndex = 0;
 
   List<IconData> btnStartPauseIcon = [
     Icons.play_circle,
@@ -116,7 +111,7 @@ class AudioPlayerProvider extends ChangeNotifier {
   }
 
   Future<void> initStateAction(String audioPath) async {
-    // waitForAudiFile(false);
+    // waitForAudiFile();
 
     try {
       audioPlayer.onDurationChanged.listen((dur) {
@@ -141,15 +136,7 @@ class AudioPlayerProvider extends ChangeNotifier {
 
       await audioPlayer.setSourceUrl(audioPath);
 
-      // if (audioPath.contains("https")) {
-      //   await audioPlayer.setSourceUrl(audioPath);
-      // } else {
-      //   await audioPlayer.setSource(
-      //     AssetSource(audioPath),
-      //   );
-      // }
-
-      // waitForAudiFile(true);
+      // waitForAudiFile();
     } catch (err) {
       print("There is an error at initStateAction");
       print("Err $err");

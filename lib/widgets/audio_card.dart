@@ -12,7 +12,10 @@ import 'audio_container_image.dart';
 class AudioCard extends StatelessWidget {
   const AudioCard({
     Key? key,
+    this.audioDetail,
   }) : super(key: key);
+
+  final audioDetail;
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +27,20 @@ class AudioCard extends StatelessWidget {
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.all(8),
-        // leading: const AudioImageContainer(
-        //   imageHeight: 90,
-        //   imageWidth: 80,
-        // ),
+        leading: AudioImageContainer(
+          imageHeight: 90,
+          imageWidth: 80,
+          audioImgURL: audioDetail['images'] == null
+              ? kDefaultTackImg
+              : audioDetail['images']['coverart'],
+        ),
         title: Text(
-          'Kweku the traveller',
+          audioDetail['title'],
           overflow: TextOverflow.ellipsis,
           style: kTextStyleSize10.copyWith(fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          'Black Sherif',
+          audioDetail['subtitle'],
           style: kAudioCardSubtitleTextStyle,
         ),
         onTap: () {
@@ -52,6 +58,22 @@ class AudioCard extends StatelessWidget {
 
           //  Provider.of<AudioPlayerProvider>(context, listen: false)
           //     .updateCurrentAudioDetail(audioDetail);
+
+          // Navigator.of(context).push(
+          //   CustomPageRoute(
+          //     child: const PlayerScreen(),
+          //     direction: AxisDirection.up,
+          //   ),
+          // );
+
+          Provider.of<AudioPlayerProvider>(context, listen: false)
+              .currentAudioPlaying(audioDetail['key']);
+
+          Provider.of<AudioPlayerProvider>(context, listen: false)
+              .currentAudioPlayingId = audioDetail['key'];
+
+          Provider.of<AudioPlayerProvider>(context, listen: false)
+              .updateCurrentAudioDetail(audioDetail);
 
           Navigator.of(context).push(
             CustomPageRoute(

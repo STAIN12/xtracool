@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:socool/constants/text_styles.dart';
 import 'package:socool/home_page.dart';
+import 'package:socool/providers/audio_player_provider.dart';
 import 'package:socool/screens/login_screen.dart';
 
 class ShowDialogContainer extends StatelessWidget {
@@ -12,6 +14,7 @@ class ShowDialogContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AudioPlayerProvider audioPlayerProvider = Provider.of(context);
     return Platform.isIOS
         ? CupertinoAlertDialog(
             title: Text(
@@ -37,11 +40,15 @@ class ShowDialogContainer extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const LoginScreen(),
-                  ),
-                ),
+                onPressed: () {
+                  audioPlayerProvider.stopAudioPlaying();
+
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(),
+                    ),
+                  );
+                },
                 child: const Text(
                   'OK',
                   style: kTextStyleSize12,
@@ -73,11 +80,14 @@ class ShowDialogContainer extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const LoginScreen(),
-                  ),
-                ),
+                onPressed: () {
+                  audioPlayerProvider.stopAudioPlaying();
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(),
+                    ),
+                  );
+                },
                 child: const Text(
                   'OK',
                   style: kTextStyleSize12,

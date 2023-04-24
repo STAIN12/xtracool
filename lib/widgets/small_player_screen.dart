@@ -30,7 +30,7 @@ class _SmallPlayerScreenState extends State<SmallPlayerScreen> {
       child: Container(
         width: double.infinity,
         height: 70,
-        color: kGreyColor,
+        color: Color.fromARGB(132, 61, 61, 61),
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

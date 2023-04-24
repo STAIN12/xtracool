@@ -41,16 +41,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     addData();
 
-    getAPITracks();
-
     super.initState();
-  }
-
-  getAPITracks() {
-    // AudioPlayerProvider audioPlayerProvider =
-    //     Provider.of(context, listen: false);
-    // audioPlayerProvider.updateChartTrackStatus(false);
-    audioAPI.getCharts(context);
   }
 
   addData() {
@@ -65,46 +56,49 @@ class _HomePageState extends State<HomePage> {
 
     networkStatus.checkInternetConnection();
 
-    return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: screenList[screenIndex],
-          ),
+    return networkStatus.hasInternet ==true
+        ? Scaffold(
+            body: Column(
+              children: [
+                Expanded(
+                  child: screenList[screenIndex],
+                ),
 
-          /////////////////////////
-          ///// Show if any audio is set to play
-          /////////////////////////////////////
-          Provider.of<AudioPlayerProvider>(context).audioFileSet
-              ? const SmallPlayerScreen()
-              : const SizedBox.shrink()
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              screenIndex == 0 ? Icons.audiotrack : Icons.audiotrack_outlined,
+                /////////////////////////
+                ///// Show if any audio is set to play
+                /////////////////////////////////////
+                Provider.of<AudioPlayerProvider>(context).audioFileSet
+                    ? const SmallPlayerScreen()
+                    : const SizedBox.shrink()
+              ],
             ),
-            label: 'Discovery',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              screenIndex == 1 ? Icons.search : Icons.search_outlined,
+            bottomNavigationBar: BottomNavigationBar(
+              items: [
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    screenIndex == 0
+                        ? Icons.audiotrack
+                        : Icons.audiotrack_outlined,
+                  ),
+                  label: 'Discovery',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    screenIndex == 1 ? Icons.search : Icons.search_outlined,
+                  ),
+                  label: 'Search',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    screenIndex == 2 ? Icons.person : Icons.person_outline,
+                  ),
+                  label: 'Profile',
+                ),
+              ],
+              onTap: changeScreenIndex,
+              currentIndex: screenIndex,
             ),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              screenIndex == 2 ? Icons.person : Icons.person_outline,
-            ),
-            label: 'Profile',
-          ),
-        ],
-        onTap: changeScreenIndex,
-        currentIndex: screenIndex,
-      ),
-    );
-    // : NoInternetScreen();
+          )
+        : NoInternetScreen();
   }
 }

@@ -57,4 +57,7 @@ const kSuccessResult = "Success";
 const kDefaultPhotoURL =
     "https://firebasestorage.googleapis.com/v0/b/preacher-777.appspot.com/o/default_images%2Fempty_user.png?alt=media&token=7c955e6b-2743-45cb-8c7b-b5ffb98fcd15";
 
+const kDefaultTackImg =
+    'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.tenforums.com%2Ftutorials%2F102323-change-default-audio-playback-device-windows-10-a.html&psig=AOvVaw1fGpJhkdIcZHEgzaKkzsTD&ust=1682406230102000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCPi86N_5wf4CFQAAAAAdAAAAABAF';
+
 const kFreeAccount = "Free plan";

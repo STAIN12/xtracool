@@ -11,9 +11,8 @@ class AudioAPI {
   ////////////////////////////////////////////////////
   ///
 
-  Future getCharts(context) async {
-    AudioPlayerProvider audioPlayerProvider =
-        Provider.of(context, listen: false);
+  Future<List> getCharts() async {
+
     try {
       var response = await http.get(
           Uri.parse(
@@ -26,17 +25,7 @@ class AudioAPI {
 
       var jsonRespond = jsonDecode(response.body);
 
-      audioPlayerProvider.getChartTracks(jsonRespond);
-
-      audioPlayerProvider.updateChartTrackStatus();
-
-      print("Yes yes yes yes");
-
-
-      print("audioPlayerProvider.isChartTracksReady ${audioPlayerProvider.isChartTracksReady}");
-
-      // print("JsonRes ${jsonRespond[49]['subtitle']}");
-      // return jsonRespond;
+      return jsonRespond;
     } catch (e) {
       print("Charts Error here ------------");
       rethrow;

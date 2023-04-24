@@ -23,38 +23,36 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(90),
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Search",
-                    style:
-                        kTextStyleSize18.copyWith(fontWeight: FontWeight.bold),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(90),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Search",
+                  style: kTextStyleSize18.copyWith(fontWeight: FontWeight.bold),
+                ),
+                kSizedBoxHeight5,
+                CustomTextField(
+                  enableBorderStyle: OutlineInputBorder(
+                    borderSide: BorderSide(color: kYellowPrimaryColor),
                   ),
-                  kSizedBoxHeight5,
-                  CustomTextField(
-                    enableBorderStyle: OutlineInputBorder(
-                      borderSide: BorderSide(color: kYellowPrimaryColor),
-                    ),
-                    focusBorderStyle: OutlineInputBorder(
-                      borderSide: BorderSide(color: kYellowPrimaryColor),
-                    ),
-                    controller: searchTextController,
-                    hintString: 'Search song, artist, playlist',
+                  focusBorderStyle: OutlineInputBorder(
+                    borderSide: BorderSide(color: kYellowPrimaryColor),
                   ),
-                ],
-              ),
+                  controller: searchTextController,
+                  hintString: 'Search song, artist, playlist',
+                ),
+              ],
             ),
           ),
-          body: ListView.builder(
-              itemCount: 20,
-              itemBuilder: (context, index) {
-                return AudioCard();
-              })),
+        ),
+        body: Center(
+          child: Text("Under construction"),
+        ),
+      ),
     );
   }
 }
