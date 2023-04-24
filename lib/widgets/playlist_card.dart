@@ -25,10 +25,11 @@ class PlayListCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const AudioImageContainer(
-            imageWidth: 150,
-            imageHeight: 150,
-          ),
+          // const AudioImageContainer(
+          //   imageWidth: 150,
+          //   imageHeight: 150,
+            
+          // ),
           kSizedBoxWidth15,
           Container(
             width: 80,

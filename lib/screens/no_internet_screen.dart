@@ -6,7 +6,6 @@ import '../constants/text_styles.dart';
 import '../providers/audio_player_provider.dart';
 import '../widgets/audio_card.dart';
 import '../widgets/custom_elevated_button.dart';
-import '../widgets/new_audio_card.dart';
 import '../widgets/playlist_card.dart';
 
 class NoInternetScreen extends StatelessWidget {

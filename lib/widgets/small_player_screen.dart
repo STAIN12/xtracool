@@ -30,7 +30,7 @@ class _SmallPlayerScreenState extends State<SmallPlayerScreen> {
       child: Container(
         width: double.infinity,
         height: 70,
-        color: kPrimaryColor,
+        color: kGreyColor,
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,7 +39,11 @@ class _SmallPlayerScreenState extends State<SmallPlayerScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const AudioImageContainer(imageWidth: 40, imageHeight: 40),
+                  AudioImageContainer(
+                    imageWidth: 40,
+                    imageHeight: 40,
+                    audioImgURL: audio.currentAudioDetail['images']['coverart'],
+                  ),
                   kSizedBoxWidth10,
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.5,
@@ -47,13 +51,13 @@ class _SmallPlayerScreenState extends State<SmallPlayerScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Apostle Oko",
+                        Text(
+                          audio.currentAudioDetail['subtitle'],
                           overflow: TextOverflow.ellipsis,
                           style: kTextStyleSize8,
                         ),
                         Text(
-                          'audioDetail[1]["title"]',
+                          audio.currentAudioDetail['title'],
                           // 'What does the bible says. What does the bible says. What does the bible says. What does the bible says. What does the bible says. What does the bible says. What does the bible says. What does the bible says. What does the bible says',
                           overflow: TextOverflow.ellipsis,
                           style: kTextStyleSize8.copyWith(

@@ -6,8 +6,9 @@ import 'package:socool/providers/state_provider.dart';
 import 'package:socool/screens/feed_screen.dart';
 import 'package:socool/screens/no_internet_screen.dart';
 import 'package:socool/screens/profile_screen.dart';
-import 'package:socool/screens/small_player_screen.dart';
+import 'package:socool/widgets/small_player_screen.dart';
 
+import 'api_service/api.dart';
 import 'screens/search_screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   ];
 
   int screenIndex = 0;
+  AudioAPI audioAPI = AudioAPI();
 
   changeScreenIndex(int index) {
     setState(() {
@@ -38,7 +40,17 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     addData();
+
+    getAPITracks();
+
     super.initState();
+  }
+
+  getAPITracks() {
+    // AudioPlayerProvider audioPlayerProvider =
+    //     Provider.of(context, listen: false);
+    // audioPlayerProvider.updateChartTrackStatus(false);
+    audioAPI.getCharts(context);
   }
 
   addData() {
@@ -53,8 +65,6 @@ class _HomePageState extends State<HomePage> {
 
     networkStatus.checkInternetConnection();
 
-    // return networkStatus.hasInternet
-    //     ?
     return Scaffold(
       body: Column(
         children: [

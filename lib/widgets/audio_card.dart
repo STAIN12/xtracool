@@ -24,10 +24,10 @@ class AudioCard extends StatelessWidget {
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.all(8),
-        leading: const AudioImageContainer(
-          imageHeight: 90,
-          imageWidth: 80,
-        ),
+        // leading: const AudioImageContainer(
+        //   imageHeight: 90,
+        //   imageWidth: 80,
+        // ),
         title: Text(
           'Kweku the traveller',
           overflow: TextOverflow.ellipsis,

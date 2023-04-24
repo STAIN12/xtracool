@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:socool/providers/audio_player_provider.dart';
 import 'package:socool/widgets/chart_card.dart';
 
+import '../api_service/api.dart';
 import '../constants/text_styles.dart';
 
 class ChartScreen extends StatefulWidget {
@@ -13,6 +16,8 @@ class ChartScreen extends StatefulWidget {
 class _ChartScreenState extends State<ChartScreen> {
   @override
   Widget build(BuildContext context) {
+    AudioPlayerProvider audioPlayerProvider = Provider.of(context);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -22,10 +27,16 @@ class _ChartScreenState extends State<ChartScreen> {
         ),
       ),
       body: ListView.builder(
-        itemCount: 3,
-        itemBuilder: ((context, index) {
-          return ChartTwoCard();
-        }),
+        itemCount: audioPlayerProvider.chartTracks.length,
+        itemBuilder: (context, index) {
+
+          // print(
+          //     "object ${audioPlayerProvider.chartTracks[20]['images']['background']}");
+          return ChartCard(
+
+            audioData: audioPlayerProvider.chartTracks[index],
+          );
+        },
       ),
     );
   }

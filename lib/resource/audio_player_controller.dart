@@ -18,8 +18,8 @@ class AudioPlayerController extends StatefulWidget {
 }
 
 class _AudioPlayerControllerState extends State<AudioPlayerController> {
-  final String onlinePath =
-      "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+  // final String onlinePath =
+  // "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
 
   // final String localPath = "downloads/complete.mp3";
 
@@ -27,9 +27,9 @@ class _AudioPlayerControllerState extends State<AudioPlayerController> {
   //// Play & Pause audio button
   //////////////////////////////////
   Widget btnPlayStart() {
-    // var audioProvider = Provider.of<AudioPlayerProvider>(context);
-    return Provider.of<AudioPlayerProvider>(context).isPlayingIcons(context,
-        'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+    var audioProvider = Provider.of<AudioPlayerProvider>(context);
+    return Provider.of<AudioPlayerProvider>(context)
+        .isPlayingIcons(context, audioProvider.currentAudioDetail['hub']['actions'][1]['uri']);
   }
 
   //////////////////////////////////
@@ -88,10 +88,13 @@ class _AudioPlayerControllerState extends State<AudioPlayerController> {
   Widget build(BuildContext context) {
     var audioProvider =
         Provider.of<AudioPlayerProvider>(context, listen: false);
+
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
+        print(
+            'audioURL ${audioProvider.currentAudioDetail['hub']['actions'][1]['uri']}');
         audioProvider.initStateAction(
-            'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+            audioProvider.currentAudioDetail['hub']['actions'][1]['uri']);
 
         // audioProvider.stopAudioPlaying();
       },

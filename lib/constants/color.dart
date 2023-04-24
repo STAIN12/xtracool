@@ -6,5 +6,5 @@ const kYellowPrimaryColor = Color(0xffFFC60B);
 const kPrimaryColorTwo = Color(0xff0A0A0A);
 
 const kWhiteColor = Colors.white;
-const kBlackColor = Colors.black;
+const kBlackColor = Color(0xFF000000);
 const kGreyColor = Colors.grey;

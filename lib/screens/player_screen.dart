@@ -41,8 +41,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
               Icons.more_vert,
               size: 18,
             ),
-            onPressed: () {
-            },
+            onPressed: () {},
           ),
         ],
       ),
@@ -59,10 +58,16 @@ class _PlayerScreenState extends State<PlayerScreen> {
                   height: 180,
                   width: 180,
                   decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      borderRadius: BorderRadius.circular(30),
-                      border: Border.all(color: kSecondaryColor),
-                      image: kDefaultAudioImage),
+                    color: kPrimaryColor,
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(color: kSecondaryColor),
+                    image: DecorationImage(
+                        image: NetworkImage(
+                          audioProvider.currentAudioDetail['images']
+                              ['coverart'],
+                        ),
+                        fit: BoxFit.cover),
+                  ),
                 ),
 
                 //////////////////
@@ -72,7 +77,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                   child: Column(
                     children: [
                       Text(
-                        "audioProvider.currentAudioDetail audioProvider.currentAudioDetail ",
+                        audioProvider.currentAudioDetail['title'],
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
                         style: kTextStyleSize15.copyWith(
@@ -80,7 +85,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                       ),
                       kSizedBoxHeight10,
                       Text(
-                        "audioProvider.currentAudioDetail audioProvider.currentAudioDetail",
+                        audioProvider.currentAudioDetail['subtitle'],
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
                         style: kTextStyleSize10,

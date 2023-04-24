@@ -38,8 +38,8 @@ class AudioPlayerProvider extends ChangeNotifier {
     return _position;
   }
 
-  void waitForAudiFile() {
-    isLoadingAudioFile = !isLoadingAudioFile;
+  void waitForAudiFile(bool fileLoaded) {
+    isLoadingAudioFile = fileLoaded;
     notifyListeners();
   }
 
@@ -116,7 +116,7 @@ class AudioPlayerProvider extends ChangeNotifier {
   }
 
   Future<void> initStateAction(String audioPath) async {
-    waitForAudiFile();
+    // waitForAudiFile(false);
 
     try {
       audioPlayer.onDurationChanged.listen((dur) {
@@ -139,17 +139,20 @@ class AudioPlayerProvider extends ChangeNotifier {
         },
       );
 
-      if (audioPath.contains("https")) {
-        await audioPlayer.setSourceUrl(audioPath);
-      } else {
-        await audioPlayer.setSource(
-          AssetSource(audioPath),
-        );
-      }
+      await audioPlayer.setSourceUrl(audioPath);
 
-      waitForAudiFile();
+      // if (audioPath.contains("https")) {
+      //   await audioPlayer.setSourceUrl(audioPath);
+      // } else {
+      //   await audioPlayer.setSource(
+      //     AssetSource(audioPath),
+      //   );
+      // }
+
+      // waitForAudiFile(true);
     } catch (err) {
       print("There is an error at initStateAction");
+      print("Err $err");
       rethrow;
       // waitForAudiFile();
     }
@@ -174,6 +177,20 @@ class AudioPlayerProvider extends ChangeNotifier {
   }
 
   /////////////////////////////////////////////
-  //////////////// Downloads //////////////////
+  //////
   /////////////////////////////////////////////
+  var chartTracks = [];
+  bool isChartTracksReady = false;
+
+  void updateChartTrackStatus() {
+    isChartTracksReady = !isChartTracksReady;
+
+    notifyListeners();
+  }
+
+  void getChartTracks(apiResponse) {
+    chartTracks.addAll(apiResponse);
+
+    notifyListeners();
+  }
 }
